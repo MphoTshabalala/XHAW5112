@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration - Powering the Nation</title>
+    <link rel="stylesheet" href="styles.css">
+    <img src="WhatsApp Image 2024-09-24 at 16.28.40_2a1bcaaf.jpg">
+    <script>
+        function calculateTotal() {
+            const coursePrices = {
+                "Subheading 1": 1500,
+                "Subheading 2": 1500,
+                "Subheading 3": 1500,
+                "Subheading 4": 1500,
+                "Subheading 5": 750,
+                "Subheading 6": 750,
+                "Subheading 7": 750
+            };
+
+            // Get all selected courses
+            const selectedCourses = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(input => input.value);
+            // Calculate total price
+            const total = selectedCourses.reduce((sum, course) => sum + coursePrices[course], 0);
+            let discount = 0;
+
+            // Apply discount based on number of courses selected
+            if (selectedCourses.length === 2) {
+                discount = total * 0.05; // 5% discount for 2 courses
+            } else if (selectedCourses.length === 3) {
+                discount = total * 0.10; // 10% discount for 3 courses
+            } else if (selectedCourses.length > 3) {
+                discount = total * 0.15; // 15% discount for more than 3 courses
+            }
+
+            // Final total after applying discount
+            const finalTotal = total - discount;
+
+            // Display the total based on number of selected courses
+            if (selectedCourses.length === 1) {
+                document.getElementById('total').innerText = `Total Fees: R${total.toFixed(2)} (No discount for 1 course)`;
+            } else {
+                document.getElementById('total').innerText = `Total Fees: R${finalTotal.toFixed(2)} (Discount applied)`;
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Registration</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="registration.html">Register</a></li>
+                <li><a href="about_us.html">About Us</a></li>
+                <li><a href="skills_info.html">Skills Info</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <form>
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+            
+            <label for="surname">Surname:</label>
+            <input type="text" id="surname" required>
+            
+            <label for="id">ID Number:</label>
+            <input type="text" id="id" required>
+            
+            <label for="address">Address:</label>
+            <input type="text" id="address" required>
+            
+            <fieldset>
+                <legend>Select Course:</legend>
+                <input type="checkbox" value="Subheading 1" onclick="calculateTotal()"> 6-Month - First Aid (R1500)<br>
+                <input type="checkbox" value="Subheading 2" onclick="calculateTotal()"> 6-Month - Sewing (R1500)<br>
+                <input type="checkbox" value="Subheading 3" onclick="calculateTotal()"> 6-Month - Landscaping (R1500)<br>
+                <input type="checkbox" value="Subheading 4" onclick="calculateTotal()"> 6-Month - Life Skills (R1500)<br>
+                <input type="checkbox" value="Subheading 5" onclick="calculateTotal()"> 6-Weeks - Child Minding (R750)<br>
+                <input type="checkbox" value="Subheading 6" onclick="calculateTotal()"> 6-Weeks - Cooking (R750)<br>
+                <input type="checkbox" value="Subheading 7" onclick="calculateTotal()"> 6-Weeks - Garden Maintenance (R750)<br>
+            </fieldset>
+            
+            <p id="total">Total Fees: R0.00</p>
+            <button type="submit">Submit</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Powering the Nation</p>
+    </footer>
+</body>
+</html>
